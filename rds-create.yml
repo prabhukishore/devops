@@ -1,0 +1,29 @@
+---
+- hosts: localhost
+  connection: local
+  #gather_facts: false
+  become: true
+  tasks:
+   - name: Create a DB instance using the default AWS KMS
+     rds_instance:
+       id: Cirrusrays-db
+       state: present
+       engine: mysql
+       storage_encrypted: True
+       db_instance_class: db.t2.small
+       username: mysqladmin
+       password: Admin1990
+       allocated_storage: 10
+     tags:
+       - create
+       - never
+   - name: Delete a db instance
+     rds_instance:
+       id:  Cirrusrays-db
+       state: absent
+       final_snapshot_identifier: Cirrusrays-db
+     tags:
+       - delete
+       - never
+
+ 
