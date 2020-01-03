@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: update repo
+      shell: sudo yum update -y
+    - name: install wget unzip
+      shell: sudo yum install wget unzip -y
+    - name: download terraform tar
+      shell: sudo wget https://releases.hashicorp.com/terraform/0.12.2/terraform_0.12.2_linux_amd64.zip
+    - name: unpack archive
+      shell: sudo unzip ./terraform_0.12.2_linux_amd64.zip 
+    - name: version
+      shell: ./terraform --version
+      register: result
+    - name: Print terraform version
+      debug:
+        var: result.stdout
+
+
+
