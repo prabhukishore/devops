@@ -1,0 +1,36 @@
+---
+- hosts: localhost
+  connection: local
+  #gather_facts: false
+  become: true
+  tasks:
+   - name: creation of rds instance
+     rds_instance:
+       state: present
+       db_name: new-database
+       db_instance_identifier: ansible-db-instance
+       engine: MySQL
+       allocated_storage: 10
+       db_instance_class: db.t2.micro
+       username: mysql_admin
+       password: Admin@1990
+       tags:
+         Environment: testing
+         Application: cms
+
+          #name: Create/Modify/Delete RDS instances 
+     #rds_instance:
+          #aws_access_key: "{{ aws_access_key | default(omit) }}"
+    #aws_secret_key: "{{ aws_secret_key | default(omit) }}"
+    #region: "{{ region }}"
+    #state: "{{ item.state }}"
+    #instance_type: "{{ item.type }}"
+    #db_name: "{{ item.db_name }}"
+    #db_instance_identifier: "{{ item.db_name }}"
+    #engine: "{{ item.engine }}"
+    #allocated_storage: "{{ item.storage | default(omit) }}"
+    #vpc_security_group_ids: "{{ created_sg | json_query(sg_id) }}"
+    #publicly_accessible: "{{ item.publicly_accessible | default(omit) }}"
+    #username: "{{ item.username }}"
+    #password: "{{ item.password }}"
+    #tags: "{{ item.tags }}"
