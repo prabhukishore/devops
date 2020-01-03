@@ -1,0 +1,21 @@
+---
+- hosts: openshift
+  become: true
+  #  gather_facts: false
+  tasks:
+    - name: download openshift package
+      shell: wget https://github.com/openshift/origin/releases/download/v3.9.0/openshift-origin-client-tools-v3.9.0-191fece-linux-64bit.tar.gz 
+    - name: un-tar package
+      shell: tar -zvxf openshift-origin-client-tools-v3.9.0-191fece-linux-64bit.tar.gz
+    - name: copy oc command to bin directory
+      shell: cd openshift-origin-client-tools-v3.9.0-191fece-linux-64bit
+    - name: copy oc command to bin directory
+      shell: cp -r openshift-origin-client-tools-v3.9.0-191fece-linux-64bit/oc /usr/local/bin  
+    - shell: oc version
+      register: result
+    - debug:
+        var: result
+        verbosity: 2
+ 
+
+
