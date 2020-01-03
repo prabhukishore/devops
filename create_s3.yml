@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  connection: local
+  #become: true
+  gather_facts: no
+  tasks: 
+   - name: Create s3 bucket
+     s3_bucket:
+      name: cirrusrays
+      region: us-east-2
+      versioning: yes
+      aws_access_key: AKIA5N54FP26AAOSJ2WR
+      aws_secret_key: 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
+     register: s3_url
+
+   - name: Display s3 url
+     debug: var=s3_url
+
