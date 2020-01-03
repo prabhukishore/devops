@@ -1,0 +1,16 @@
+---
+- name: ec2 creation
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: launching ec2
+      ec2:
+       key_name: cirrus 
+       instance_type: t2.micro
+       image: ami-0520e698dd500b1d1
+       region: us-east-2
+       wait: yes
+       group: devops
+       count: 1
+       vpc_subnet_id: subnet-94f2aaee
+       assign_public_ip: yes
