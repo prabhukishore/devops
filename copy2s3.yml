@@ -1,0 +1,35 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: put an object to s3 bucket
+      aws_s3:
+        bucket: cirrusrays
+        region: us-east-2
+        object: index file
+        src: index.php
+        mode: put
+      tags:
+          - put
+          - never
+    - name: delete an object to s3 bucket
+      aws_s3:
+        bucket: cirrusrays
+        region: us-east-2
+        object: index file
+        mode: delobj
+      tags:
+        - delobj
+        - never
+    - name: delete an bucket to s3 bucket
+      aws_s3:
+        bucket: cirrusrays
+        region: us-east-2
+        mode: delete
+      tags:
+        - delete
+        - never
+
+
+

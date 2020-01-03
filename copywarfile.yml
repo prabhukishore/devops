@@ -1,0 +1,8 @@
+---
+- hosts: tomcat
+  become: true
+  tasks:
+    - name: copy war onto tomcat server
+      copy:
+        src: /opt/myproj.war
+        dest: /opt/apache-tomcat-8.5.50/webapps
